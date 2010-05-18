@@ -75,8 +75,10 @@ class Gdn_Router {
    public function MatchRoute($Request) {
    
       // Check for a literal match
-      if ($this->GetRoute($Request))
-         return $this->GetRoute($Request);
+      if ($route = $this->GetRoute($Request)){
+        $route['FinalDestination'] = $route['Destination'];
+        return $route;
+      }
          
       foreach ($this->Routes as $Route => $RouteData)
       {
